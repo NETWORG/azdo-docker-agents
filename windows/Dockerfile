@@ -30,7 +30,7 @@ rmdir /S /Q "%ProgramFiles(x86)%/Microsoft Visual Studio/Installer/" \
 && rmdir /S /Q "%ProgramData%/Package Cache/"
 
 # msbuild
-RUN & 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/MSBuild.exe' /version
+RUN 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/MSBuild.exe' /version
 
 # choco
 RUN powershell -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))"
