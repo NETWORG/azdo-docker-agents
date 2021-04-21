@@ -9,7 +9,6 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v2
       - name: Build and push to Container Registry
-      - name: Build and push console
         working-directory: ./windows/
         run: |
           docker login ghcr.io -u $env:USER -p $env:TOKEN
