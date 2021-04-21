@@ -4,17 +4,18 @@ on:
 jobs:
   push_to_registry:
     name: Build and push to Container Registry
-    runs-on: windows-latest
+    runs-on: windows-2019
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
       - name: Build and push to Container Registry
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com
-          push: true
-          path: ./windows/
-          repository: NETWORG/azdo-docker-agents/windows
-          tags: latest
+      - name: Build and push console
+        working-directory: ./windows/
+        run: |
+          docker login ghcr.io -u $env:USER -p $env:TOKEN
+          docker build -t ghcr.io/NETWORG/azdo-docker-agents/windows:latest
+          docker image push ghcr.io/NETWORG/azdo-docker-agents/windows:latest
+          docker logout
+        env:
+          USER: ${{ github.actor }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
