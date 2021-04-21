@@ -14,7 +14,7 @@ jobs:
           docker login ghcr.io -u $env:USER -p $env:TOKEN
           docker build -t ghcr.io/networg/azdo-docker-agents/windows:latest .
           docker image push ghcr.io/networg/azdo-docker-agents/windows:latest
-          docker logout
+          docker logout ghcr.io
         env:
           USER: GitHubActions
           TOKEN: ${{ secrets.GITHUB_TOKEN }}

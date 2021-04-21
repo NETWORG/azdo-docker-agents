@@ -25,12 +25,9 @@ RUN powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log 
 
 ### Cleanup Visual Studio installation
 RUN \
-rmdir /S /Q "%ProgramFiles(x86)%/Microsoft Visual Studio/Installer/" \
-&& powershell Remove-Item -Force -Recurse "$Env:TEMP/*" \
-&& rmdir /S /Q "%ProgramData%/Package Cache/"
-
-# msbuild
-RUN ["C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/MSBuild.exe", "/version"]
+    rmdir /S /Q "%ProgramFiles(x86)%/Microsoft Visual Studio/Installer/" \
+    && powershell Remove-Item -Force -Recurse "$Env:TEMP/*" \
+    && rmdir /S /Q "%ProgramData%/Package Cache/"
 
 # choco
 RUN powershell -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))"
