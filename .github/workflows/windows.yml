@@ -16,5 +16,5 @@ jobs:
           docker image push ghcr.io/networg/azdo-docker-agents/windows:latest
           docker logout
         env:
-          USER: ${{ github.actor }}
+          USER: GitHubActions
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
