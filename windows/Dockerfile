@@ -1,5 +1,7 @@
 FROM mcr.microsoft.com/windows/servercore:ltsc2019
 
+COPY start.ps1 .
+
 # Install Visual Studio Components: https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-enterprise?view=vs-2019
 ADD https://aka.ms/vs/16/release/vs_community.exe "C:/Users/ContainerAdministrator/AppData/Local/Temp/vs_community.exe"
 RUN "%TEMP%\vs_community.exe" \
@@ -45,4 +47,6 @@ RUN choco install -y 7zip.install
 # RUN nuget help
 
 # CMD ["powershell"]
-ENTRYPOINT ["C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Common7\\Tools\\VsDevCmd.bat", "&&", "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
+# ENTRYPOINT ["C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Common7\\Tools\\VsDevCmd.bat", "&&", "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
+
+CMD powershell .\start.ps1
