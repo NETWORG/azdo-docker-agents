@@ -8,15 +8,13 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1 
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push to Container Registry
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v1
         with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
           push: true
           context: ./windows/
-          tags: ghcr.io/NETWORG/azdo-docker-agents/windows:latest
+          repository: NETWORG/azdo-docker-agents/windows
+          tags: latest
