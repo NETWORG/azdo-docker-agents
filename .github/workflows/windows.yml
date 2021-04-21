@@ -12,7 +12,7 @@ jobs:
         working-directory: ./windows/
         run: |
           docker login ghcr.io -u $env:USER -p $env:TOKEN
-          docker build -t ghcr.io/networg/azdo-docker-agents/windows:latest
+          docker build -t ghcr.io/networg/azdo-docker-agents/windows:latest .
           docker image push ghcr.io/networg/azdo-docker-agents/windows:latest
           docker logout
         env:
